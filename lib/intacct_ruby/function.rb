@@ -12,6 +12,7 @@ module IntacctRuby
       create
       update
       delete
+      create_sotransaction
     ).freeze
 
     def initialize(function_type, object_type, arguments = {})
@@ -23,12 +24,17 @@ module IntacctRuby
     end
 
     def to_xml
+
       xml = Builder::XmlMarkup.new
 
       xml.function controlid: controlid do
         xml.tag!(@function_type) do
-          xml.tag!(@object_type.upcase) do
-            xml << argument_xml(@arguments)
+          if @object_type!=""
+            xml.tag!(@object_type.upcase) do
+              xml << argument_xml(@arguments)
+            end
+          else
+            xml<<argument_xml(@arguments)
           end
         end
       end
@@ -84,7 +90,7 @@ module IntacctRuby
     def validate_type!
       unless ALLOWED_TYPES.include?(@function_type)
         raise Exceptions::UnknownFunctionType,
-              "Type #{@object_type} not recognized. Function Type must be " \
+              "Type #{@function_type} not recognized. Function Type must be " \
               "one of #{ALLOWED_TYPES}."
       end
     end
