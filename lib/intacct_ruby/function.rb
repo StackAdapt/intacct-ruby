@@ -50,7 +50,7 @@ module IntacctRuby
       xml = Builder::XmlMarkup.new
 
       arguments_to_convert.each do |key, value|
-        argument_key = key.to_s.upcase
+        argument_key = key.to_s
 
         xml.tag!(argument_key) do
           xml << argument_value_as_xml(value)
