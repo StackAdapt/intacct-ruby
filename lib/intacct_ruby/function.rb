@@ -13,6 +13,7 @@ module IntacctRuby
       update
       delete
       create_sotransaction
+      create_arpayment
     ).freeze
 
     def initialize(function_type, object_type, arguments = {})
