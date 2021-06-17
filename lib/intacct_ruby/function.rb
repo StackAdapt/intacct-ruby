@@ -15,6 +15,7 @@ module IntacctRuby
       create_sotransaction
       create_arpayment
       create_potransaction
+      get_araging
     ).freeze
 
     def initialize(function_type, object_type, arguments = {})
